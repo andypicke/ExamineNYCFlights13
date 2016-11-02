@@ -98,7 +98,6 @@ shinyServer(function(input, output) {
                 
                 g2 <- g2 + geom_line(data=linedf,aes(x=lons,y=lats,group=group),color="grey")+ guides(fill=FALSE)
                 
-                #                g2 <- g2+ geom_line()
                 g2
         })
         
