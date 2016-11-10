@@ -11,12 +11,13 @@ library(shiny)
 library(ggplot2)
 library(nycflights13)
 library(maps)
+library(dplyr)
 
 shinyServer(function(input, output) {
         
         # Filter flights based on input
         flights2 <- reactive({
-                subset(flights,origin==input$airport & month==input$month & day==input$day)
+                filter(flights,origin==input$airport & month==input$month & day==input$day)
         })
         
         # Render data table for selected flights
@@ -40,7 +41,7 @@ shinyServer(function(input, output) {
         })
         
         apnames<-reactive({unique(flights2()$dest)})
-        airports2<-reactive({subset(airports,faa %in% apnames())})
+        airports2<-reactive({filter(airports,faa %in% apnames())})
         
         # Make map of airports and flights for selected input
         output$map_plot <- renderPlot({
